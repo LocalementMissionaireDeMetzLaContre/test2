@@ -20,10 +20,12 @@ const pageFlip = new St.PageFlip(bookEl, {
 
 pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
 
-// Détecte si l'utilisateur utilise 2 doigts → mode zoom
-bookEl.addEventListener("touchstart", (e) => {
-    if (e.touches.length > 1) {
-        isZooming = true;
+bookEl.addEventListener("touchmove", (e) => {
+    const zoom = pageFlip.getZoom();
+    if (zoom !== 1) {
+        // Si on est zoomé, empêche le flip mais pas le pinch
+        e.preventDefault(); // bloque le scroll / flip
+        e.stopPropagation(); // laisse PageFlip tranquille sur les autres events
     }
 }, { passive: false });
 
