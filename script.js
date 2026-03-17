@@ -8,6 +8,7 @@ document.addEventListener('touchstart', e => {
 document.addEventListener('touchend', e => {
     if (e.touches.length < 2) isPinching = false;
 }, { passive: false });
+
 // Initialisation PageFlip
 const pageFlip = new St.PageFlip(document.getElementById("book"), {
     width: 300,
