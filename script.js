@@ -1,12 +1,13 @@
 let isZooming = false;
 
-// Détecte quand l'utilisateur utilise 2 doigts
+// Détecte si l'utilisateur utilise 2 doigts → active le mode zoom
 document.addEventListener("touchstart", function(e) {
     if (e.touches.length > 1) {
         isZooming = true;
     }
 }, { passive: false });
 
+// Désactive le mode zoom quand il n'y a plus que 1 doigt
 document.addEventListener("touchend", function(e) {
     if (e.touches.length < 2) {
         isZooming = false;
@@ -16,7 +17,7 @@ document.addEventListener("touchend", function(e) {
 // Empêche le flip PageFlip pendant le zoom
 document.addEventListener("touchmove", function(e) {
     if (isZooming) {
-        e.stopImmediatePropagation(); // bloque PageFlip
+        e.stopImmediatePropagation(); // bloque le flip
     }
 }, { passive: false });
 
