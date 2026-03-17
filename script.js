@@ -16,7 +16,9 @@ const pageFlip = new St.PageFlip(bookElement, {
     pinchZoom: true,
     maxZoom: 4,
 
-    swipeAreaWidth: 40
+    swipeAreaWidth: 40,
+    clickEventForward: false
+    
 });
 
 pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
