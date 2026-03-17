@@ -26,3 +26,9 @@ const pageFlip = new St.PageFlip(document.getElementById("book"), {
 
 pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
 
+// 🔒 BLOQUER LE FLIP PENDANT LE ZOOM
+document.addEventListener("touchmove", function(e) {
+    if (isZooming) {
+        e.stopImmediatePropagation(); // empêche PageFlip de capter le swipe
+    }
+}, { passive: false });
