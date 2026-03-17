@@ -9,7 +9,13 @@ const pageFlip = new St.PageFlip(document.getElementById("book"), {
     minWidth: 300,
     maxWidth: 500,
     minHeight: 400,
-    maxHeight: 700
+    maxHeight: 700,
+
+    btnZoomIn: true,
+    btnZoomOut: true,
+    zoomEnabled: true,
+    maxZoom: 3,
+    
 });
 
 pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
