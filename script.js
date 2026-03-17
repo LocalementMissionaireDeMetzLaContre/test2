@@ -23,6 +23,7 @@ document.getElementById('book').addEventListener('touchmove', e => {
         // ne bloque pas le scroll / drag du navigateur
     }
 }, { passive: false });
+
 // Initialisation PageFlip
 const pageFlip = new St.PageFlip(document.getElementById("book"), {
     width: 300,
