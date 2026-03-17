@@ -12,7 +12,7 @@ const pageFlip = new St.PageFlip(document.getElementById("book"), {
     size: "stretch",        
     showCover: true,
     usePortrait: true,      
-    mobileScrollSupport: false, 
+    mobileScrollSupport: true, 
     minWidth: 300,
     maxWidth: 500,
     minHeight: 400,
