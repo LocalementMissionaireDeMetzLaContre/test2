@@ -24,28 +24,22 @@ const pageFlip = new St.PageFlip(bookElement, {
 pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
 
 // Variable pour savoir si l'utilisateur fait un pinch
-let isZooming = false;
+let isPinching = false;
 
-// Détecte le pinch avec 2 doigts
-document.addEventListener("touchstart", (e) => {
+document.addEventListener('touchstart', (e) => {
     if (e.touches.length > 1) {
-        isZooming = true;
-        pageFlip.disable(); // 🚫 désactive le swipe PageFlip
+        isPinching = true;  // on commence un pinch
     }
-}, { passive: false });
+}, {passive: false});
 
-// Quand il relâche un doigt
-document.addEventListener("touchend", (e) => {
+document.addEventListener('touchend', (e) => {
     if (e.touches.length < 2) {
-        isZooming = false;
-        pageFlip.enable(); // ✅ réactive le swipe PageFlip
+        isPinching = false; // pinch terminé
     }
-}, { passive: false });
+}, {passive: false});
 
-// On empêche la propagation pour être sûr
-document.addEventListener("touchmove", (e) => {
-    if (isZooming) {
-        e.stopPropagation();
-        e.preventDefault();
+pageFlip.on('flipStart', (e) => {
+    if (isPinching) {
+        e.preventDefault(); // bloque le flip si pinch en cours
     }
-}, { passive: false });
+});
