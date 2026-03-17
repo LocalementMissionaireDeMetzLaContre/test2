@@ -1,6 +1,6 @@
 let isPinching = false;
 
-// Détecte le pinch à 2 doigts
+// Détecte pinch
 document.addEventListener('touchstart', e => {
     if (e.touches.length > 1) isPinching = true;
 }, { passive: false });
@@ -9,6 +9,20 @@ document.addEventListener('touchend', e => {
     if (e.touches.length < 2) isPinching = false;
 }, { passive: false });
 
+// Bloque le flip seulement pendant le pinch
+pageFlip.on('flipStart', e => {
+    if (isPinching) {
+        e.preventDefault();  // empêche le flip
+    }
+});
+
+// Autorise le déplacement / drag après zoom
+document.getElementById('book').addEventListener('touchmove', e => {
+    if (isPinching) {
+        e.stopPropagation();   // empêche PageFlip de réagir
+        // ne bloque pas le scroll / drag du navigateur
+    }
+}, { passive: false });
 // Initialisation PageFlip
 const pageFlip = new St.PageFlip(document.getElementById("book"), {
     width: 300,
