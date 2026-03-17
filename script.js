@@ -1,7 +1,16 @@
-const bookElement = document.getElementById("book");
+let isPinching = false;
+
+// Détecte le pinch à 2 doigts
+document.addEventListener('touchstart', e => {
+    if (e.touches.length > 1) isPinching = true;
+}, { passive: false });
+
+document.addEventListener('touchend', e => {
+    if (e.touches.length < 2) isPinching = false;
+}, { passive: false });
 
 // Initialisation PageFlip
-const pageFlip = new St.PageFlip(bookElement, {
+const pageFlip = new St.PageFlip(document.getElementById("book"), {
     width: 300,
     height: 500,
     size: "stretch",
@@ -16,30 +25,13 @@ const pageFlip = new St.PageFlip(bookElement, {
     pinchZoom: true,
     maxZoom: 4,
 
-    swipeAreaWidth: 40,
+    swipeAreaWidth: 50,    // swipe seulement sur 50px des bords
     clickEventForward: false
-    
 });
 
 pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
 
-// Variable pour savoir si l'utilisateur fait un pinch
-let isPinching = false;
-
-document.addEventListener('touchstart', (e) => {
-    if (e.touches.length > 1) {
-        isPinching = true;  // on commence un pinch
-    }
-}, {passive: false});
-
-document.addEventListener('touchend', (e) => {
-    if (e.touches.length < 2) {
-        isPinching = false; // pinch terminé
-    }
-}, {passive: false});
-
-pageFlip.on('flipStart', (e) => {
-    if (isPinching) {
-        e.preventDefault(); // bloque le flip si pinch en cours
-    }
+// Bloque le flip si pinch en cours
+pageFlip.on('flipStart', e => {
+    if (isPinching) e.preventDefault();
 });
