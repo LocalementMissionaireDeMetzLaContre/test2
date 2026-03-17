@@ -1,7 +1,4 @@
-const bookEl = document.getElementById("book");
-
-// Initialisation PageFlip
-const pageFlip = new St.PageFlip(bookEl, {
+const pageFlip = new St.PageFlip(document.getElementById("book"), {
     width: 300,
     height: 500,
     size: "stretch",
@@ -19,11 +16,26 @@ const pageFlip = new St.PageFlip(bookEl, {
 
 pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
 
-// 🔒 Bloque le flip si zoom actif
-bookEl.addEventListener("touchmove", (e) => {
+// ⚡ Bloquer flip pendant le zoom
+let isZooming = false;
+
+function checkZoom() {
     const zoom = pageFlip.getZoom();
-    if (zoom !== 1) {
-        e.preventDefault();       // empêche le scroll et swipe
-        e.stopPropagation();      // ne laisse pas passer l'événement au flip
+    if (zoom > 1 && !isZooming) {
+        isZooming = true;
+        pageFlip.disable(); // Bloque le swipe
+    } else if (zoom <= 1 && isZooming) {
+        isZooming = false;
+        pageFlip.enable(); // Réactive le swipe
     }
+}
+
+// Vérifie le zoom à chaque frame pendant le pinch
+document.addEventListener("touchmove", () => {
+    checkZoom();
+}, { passive: false });
+
+// Aussi au relâchement, pour s’assurer que le swipe revient
+document.addEventListener("touchend", () => {
+    checkZoom();
 }, { passive: false });
