@@ -1,20 +1,19 @@
-// Full mobile-first : on part du téléphone
+
 const pageFlip = new St.PageFlip(document.getElementById("book"), {
-    width: 300,             // taille initiale mobile
+    width: 300,            
     height: 500,
-    size: "stretch",         // s'adapte à la div
+    size: "stretch",        
     showCover: true,
-    usePortrait: true,       // 1 page à la fois
-    mobileScrollSupport: true, // support tactile
+    usePortrait: true,      
+    mobileScrollSupport: true, 
     minWidth: 300,
     maxWidth: 500,
     minHeight: 400,
     maxHeight: 700,
 
-    btnZoomIn: true,
-    btnZoomOut: true,
     zoomEnabled: true,
-    maxZoom: 3,
+    pinchZoom: true,   
+    maxZoom: 4
     
 });
 
