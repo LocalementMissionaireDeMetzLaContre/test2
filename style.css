@@ -3,34 +3,33 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;       /* empêche le scroll */
+    overflow: hidden; /* empêche le scroll */
     display: flex;
     justify-content: center;
     align-items: center;
     background: #8f1433;
 }
 
-#book{
-    width: 100vw;    
+#book {
+    width: 100vw;
     height: 100vh;
-    touch-action: pan-y pinch-zoom;
+    touch-action: pan-y pinch-zoom; /* permet scroll vertical + pinch zoom */
 }
 
-
-.my-page{
-    background:rgb(255, 255, 255);
+.my-page {
+    background: rgb(255, 255, 255);
 }
 
-.my-page img{
-    width:100%;
-    height:100%;
+.my-page img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
-/* Si tu veux plus tard : grand écran */
+/* Grand écran */
 @media screen and (min-width: 601px){
-    #book{
-        width: 500px;   /* taille plus grande pour tablette / PC */
+    #book {
+        width: 500px;
         height: 700px;
     }
 }
